@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Moon, Sun, Menu, X } from 'lucide-react';
@@ -7,6 +8,7 @@ export function Header() {
     const saved = localStorage.getItem('darkMode');
     return saved ? JSON.parse(saved) : false;
   });
+
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -21,9 +23,7 @@ export function Header() {
   }, [darkMode]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -41,8 +41,7 @@ export function Header() {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Reviews', path: '/reviews' },
-    { name: 'News', path: '/news' },
+    { name: 'Motivation & Our Inspiration', path: '/motivation' }, // ✅ FIXED ROUTE
     { name: 'Videos', path: '/videos' },
     { name: 'Contact', path: '/contact' }
   ];
@@ -74,6 +73,7 @@ export function Header() {
 
             <div className="flex items-center space-x-4">
 
+              {/* Theme Toggle */}
               <button
                 onClick={() => setDarkMode(!darkMode)}
                 className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
@@ -86,7 +86,7 @@ export function Header() {
                 )}
               </button>
 
-              {/* ✅ Fixed Subscribe button (external link) */}
+              {/* Subscribe Button */}
               <a
                 href="https://www.youtube.com/@BrajBuzzTech"
                 target="_blank"
@@ -96,6 +96,7 @@ export function Header() {
                 Subscribe
               </a>
 
+              {/* Mobile Menu Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="md:hidden p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
@@ -112,12 +113,10 @@ export function Header() {
         </div>
       </header>
 
+      {/* Mobile Sidebar */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
-          <div
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setMobileMenuOpen(false)}
-          />
+          <div className="absolute inset-0 bg-black/50" onClick={() => setMobileMenuOpen(false)} />
           <div className="absolute right-0 top-16 bottom-0 w-64 bg-white dark:bg-[#0A0A0A] shadow-xl">
             <nav className="flex flex-col p-6 space-y-4">
               {navLinks.map((link) => (
@@ -131,12 +130,10 @@ export function Header() {
                 </Link>
               ))}
 
-              {/* ✅ Fixed Subscribe button for mobile menu */}
               <a
                 href="https://www.youtube.com/@BrajBuzzTech"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => setMobileMenuOpen(false)}
                 className="bg-[#002366] text-white px-6 py-3 rounded-full text-center hover:bg-[#003399] transition-all"
               >
                 Subscribe
@@ -146,33 +143,23 @@ export function Header() {
         </div>
       )}
 
+      {/* Search Overlay (Optional UI Keep) */}
       {searchOpen && (
         <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4">
-          <div className="w-full max-w-3xl">
-            <div className="relative">
-              <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400" size={24} />
-              <input
-                type="text"
-                placeholder="Search reviews, news, guides..."
-                autoFocus
-                className="w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white pl-16 pr-16 py-6 text-xl rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#002366]"
-              />
-              <button
-                onClick={() => setSearchOpen(false)}
-                className="absolute right-6 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                aria-label="Close search"
-              >
-                <X size={24} />
-              </button>
-            </div>
-            <div className="mt-8 text-gray-400 text-center">
-              <p className="text-sm mb-4">Recent Searches</p>
-              <div className="flex flex-wrap gap-2 justify-center">
-                <span className="px-4 py-2 bg-gray-800 rounded-full text-sm">MacBook Pro M4</span>
-                <span className="px-4 py-2 bg-gray-800 rounded-full text-sm">Best headphones</span>
-                <span className="px-4 py-2 bg-gray-800 rounded-full text-sm">iPhone 16</span>
-              </div>
-            </div>
+          <div className="w-full max-w-3xl relative">
+            <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400" size={24} />
+            <input
+              type="text"
+              autoFocus
+              placeholder="Search..."
+              className="w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white pl-16 pr-16 py-6 text-xl rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#002366]"
+            />
+            <button
+              onClick={() => setSearchOpen(false)}
+              className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            >
+              <X size={24} />
+            </button>
           </div>
         </div>
       )}

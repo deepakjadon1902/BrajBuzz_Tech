@@ -6,16 +6,7 @@ export function Footer() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const categories = [
-    'Smartphones',
-    'Laptops & PCs',
-    'Wearables',
-    'Gaming',
-    'Smart Home',
-    'Audio',
-    'Cameras',
-    'AI & Software'
-  ];
+
 
   const quickLinks = [
     'About Us',
@@ -58,19 +49,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* ---------- Categories ---------- */}
-          <div>
-            <h4 className="text-lg font-semibold text-white mb-4">Categories</h4>
-            <ul className="space-y-2">
-              {categories.map((category) => (
-                <li key={category}>
-                  <Link to="/reviews" className="text-sm hover:text-white transition-colors">
-                    {category}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+        
 
           {/* ---------- Quick Links (UPDATED) ---------- */}
           <div>

@@ -14,7 +14,7 @@ export function HeroSection() {
             BrajBuzz Tech
           </h1>
           <p className="mt-4 text-neutral-300 max-w-lg">
-            Transforming ideas into powerful digital solutions. We craft cutting-edge technology experiences that drive innovation and help your business thrive in the digital age.
+            BrajBuzz Tech: Your money, your choice, our honest opinion. We test tech the way you actually use it—in your hands, in real life, not in some sterile lab. We compare, we question, we dig deep. No fluff, no bias, just pure facts that help you decide what's truly worth your investment.
           </p>
         </div>
         <div className="flex-1 relative">
