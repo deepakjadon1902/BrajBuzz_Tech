@@ -111,14 +111,6 @@ export function VideoSection() {
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
             Watch Our Latest Reviews
           </h2>
-          <a
-            href="https://youtube.com/@BrajBuzzTech"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-red-600 text-white px-6 py-3 rounded-full hover:bg-red-700 transition-all duration-300 hover:scale-105 font-semibold"
-          >
-            Subscribe to BrajBuzz Tech
-          </a>
         </div>
 
         {/* Video Grid */}

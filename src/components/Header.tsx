@@ -91,9 +91,11 @@ export function Header() {
                 href="https://www.youtube.com/@BrajBuzzTech"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden md:block bg-[#002366] text-white px-6 py-2 rounded-full hover:bg-[#003399] transition-all duration-300 hover:scale-105"
+                className="hidden md:block bg-[#E62117] text-white px-6 py-3 rounded-full text-center hover:bg-[#CC1813] transition-all duration-300 hover:scale-105
+
+"
               >
-                Subscribe
+                YouTube Channel
               </a>
 
               {/* Mobile Menu Button */}
@@ -134,9 +136,10 @@ export function Header() {
                 href="https://www.youtube.com/@BrajBuzzTech"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#002366] text-white px-6 py-3 rounded-full text-center hover:bg-[#003399] transition-all"
+                className="bg-[#E62117] text-white px-6 py-3 rounded-full text-center hover:bg-[#CC1813] transition-all duration-300
+"
               >
-                Subscribe
+                YouTube Channel
               </a>
             </nav>
           </div>
