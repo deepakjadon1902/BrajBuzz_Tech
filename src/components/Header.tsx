@@ -41,7 +41,7 @@ export function Header() {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Motivation & Our Inspiration', path: '/motivation' }, // ✅ FIXED ROUTE
+    { name: 'Motivation & Our Inspiration', path: '/motivation' },
     { name: 'Videos', path: '/videos' },
     { name: 'Contact', path: '/contact' }
   ];
@@ -55,8 +55,19 @@ export function Header() {
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            <Link to="/" className="text-2xl font-bold text-[#002366] dark:text-white">
-              BrajBuzz Tech
+            
+            {/* Logo and Brand Name */}
+            <Link to="/" className="flex items-center gap-3 group">
+              <div className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-[#002366] dark:ring-white transition-all duration-300 group-hover:ring-4">
+                <img 
+                  src="/images/logo.png" 
+                  alt="BrajBuzz Tech Logo" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <span className="text-2xl font-bold text-[#002366] dark:text-white transition-colors">
+                BrajBuzz Tech
+              </span>
             </Link>
 
             <nav className="hidden md:flex items-center space-x-8">
@@ -91,9 +102,7 @@ export function Header() {
                 href="https://www.youtube.com/@BrajBuzzTech"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden md:block bg-[#E62117] text-white px-6 py-3 rounded-full text-center hover:bg-[#CC1813] transition-all duration-300 hover:scale-105
-
-"
+                className="hidden md:block bg-[#E62117] text-white px-6 py-3 rounded-full text-center hover:bg-[#CC1813] transition-all duration-300 hover:scale-105"
               >
                 YouTube Channel
               </a>
@@ -136,8 +145,7 @@ export function Header() {
                 href="https://www.youtube.com/@BrajBuzzTech"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#E62117] text-white px-6 py-3 rounded-full text-center hover:bg-[#CC1813] transition-all duration-300
-"
+                className="bg-[#E62117] text-white px-6 py-3 rounded-full text-center hover:bg-[#CC1813] transition-all duration-300"
               >
                 YouTube Channel
               </a>

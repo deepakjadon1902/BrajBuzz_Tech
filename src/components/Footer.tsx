@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Linkedin, Instagram, Youtube, ArrowUp } from 'lucide-react';
 
@@ -6,14 +7,11 @@ export function Footer() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-
-
   const quickLinks = [
     'About Us',
     'Contact',
     'Privacy Policy',
     'Terms of Service',
-    'Editorial Policy'
   ];
 
   return (
@@ -21,9 +19,18 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           
-          {/* ---------- Company Info ---------- */}
+          {/* ---------- Company Info with Logo ---------- */}
           <div>
-            <h3 className="text-2xl font-bold text-white mb-4">BrajBuzz Tech</h3>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-white/20">
+                <img 
+                  src="/images/logo.png" 
+                  alt="BrajBuzz Tech Logo" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-2xl font-bold text-white">BrajBuzz Tech</h3>
+            </div>
             <p className="text-sm mb-4 text-gray-400">
               Your Source for Honest Tech Reviews
             </p>
@@ -37,10 +44,10 @@ export function Footer() {
               <a href="https://facebook.com" className="hover:text-white transition-colors" aria-label="Facebook">
                 <Facebook size={20} />
               </a>
-              <a href="https://linkedin.com" className="hover:text-white transition-colors" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/company/brajbuzz-tech" className="hover:text-white transition-colors" aria-label="LinkedIn">
                 <Linkedin size={20} />
               </a>
-              <a href="https://instagram.com" className="hover:text-white transition-colors" aria-label="Instagram">
+              <a href="https://www.instagram.com/brajbuzztech?igsh=ZmlxZTA1bzh4Yzcz" className="hover:text-white transition-colors" aria-label="Instagram">
                 <Instagram size={20} />
               </a>
               <a href="https://youtube.com/@BrajBuzzTech" className="hover:text-white transition-colors" aria-label="YouTube">
@@ -49,19 +56,16 @@ export function Footer() {
             </div>
           </div>
 
-        
-
-          {/* ---------- Quick Links (UPDATED) ---------- */}
+          {/* ---------- Quick Links ---------- */}
           <div>
             <h4 className="text-lg font-semibold text-white mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {quickLinks.map((link) => {
                 let path = '/';
-                if (link === 'About Us') path = '/about';       // ✅ Added route for About Us
+                if (link === 'About Us') path = '/about';
                 else if (link === 'Contact') path = '/contact';
                 else if (link === 'Privacy Policy') path = '/privacy';
                 else if (link === 'Terms of Service') path = '/terms';
-                else if (link === 'Editorial Policy') path = '/editorial';
 
                 return (
                   <li key={link}>
