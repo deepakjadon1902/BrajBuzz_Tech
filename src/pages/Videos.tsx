@@ -1,5 +1,7 @@
+
+
 import { useState, useEffect } from "react";
-import { Play, Eye, Users, Loader } from "lucide-react";
+import { Play, Eye, Users, Loader, CheckCircle } from "lucide-react";
 
 interface ChannelInfo {
   title: string;
@@ -112,10 +114,10 @@ export function Videos() {
   // Loading State
   if (loading) {
     return (
-      <div className="min-h-screen bg-white dark:bg-[#0A0A0A] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0F0F0F] flex items-center justify-center">
         <div className="text-center">
-          <Loader size={48} className="animate-spin text-[#002366] dark:text-blue-400 mx-auto mb-4" />
-          <p className="text-gray-600 dark:text-gray-400">Loading YouTube channel...</p>
+          <Loader size={48} className="animate-spin text-[#FF0000] mx-auto mb-4" />
+          <p className="text-[#AAAAAA] text-lg">Loading YouTube channel...</p>
         </div>
       </div>
     );
@@ -124,85 +126,109 @@ export function Videos() {
   // Error State
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-[#0A0A0A] text-center">
-        <p className="text-red-600 dark:text-red-400 mb-4">{error}</p>
-        <button
-          onClick={fetchYouTubeData}
-          className="bg-[#002366] text-white px-6 py-2 rounded-lg hover:bg-[#003399] transition-colors"
-        >
-          Try Again
-        </button>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#0F0F0F] text-center px-4">
+        <div className="bg-[#272727] rounded-xl p-8 max-w-md">
+          <p className="text-[#FF0000] mb-6 text-lg">{error}</p>
+          <button
+            onClick={fetchYouTubeData}
+            className="bg-[#FF0000] text-white px-8 py-3 rounded-full hover:bg-[#CC0000] transition-all font-medium"
+          >
+            Try Again
+          </button>
+        </div>
       </div>
     );
   }
 
   // Main Content
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0A0A0A] pt-24 pb-16">
-      <div className="container mx-auto px-4">
-        {/* Channel Info */}
+    <div className="min-h-screen bg-[#0F0F0F] pt-20 pb-16">
+      <div className="w-full px-4 sm:px-6 lg:px-8 max-w-[1800px] mx-auto">
+        {/* Channel Banner */}
         {channelInfo && (
-          <div
-            className="rounded-2xl mb-12 p-8 bg-cover bg-center relative overflow-hidden"
-            style={{
-              backgroundImage: `url(${channelInfo.banner})`,
-            }}
-          >
-            <div className="absolute inset-0 bg-black/60"></div>
-            <div className="relative z-10 flex flex-col md:flex-row justify-between items-center text-white">
-              <div>
-                <h2 className="text-3xl font-bold mb-2">{channelInfo.title}</h2>
-                <p className="text-gray-200 mb-4">Tech Reviews • Tutorials • Comparisons</p>
-                <div className="flex space-x-6">
-                  <div className="flex items-center">
-                    <Users size={18} className="mr-2" />
-                    {formatNumber(channelInfo.subscribers)} subscribers
-                  </div>
-                  <div className="flex items-center">
-                    <Eye size={18} className="mr-2" />
-                    {formatNumber(channelInfo.totalViews)} views
+          <div className="mb-6 sm:mb-8">
+            {/* Banner Image */}
+            <div
+              className="w-full h-32 sm:h-40 md:h-48 lg:h-56 rounded-xl bg-cover bg-center relative overflow-hidden"
+              style={{
+                backgroundImage: `url(${channelInfo.banner})`,
+              }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+            </div>
+
+            {/* Channel Info Card */}
+            <div className="bg-[#212121] rounded-xl p-4 sm:p-6 mt-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="flex-1 w-full sm:w-auto">
+                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 flex items-center gap-2 flex-wrap">
+                    {channelInfo.title}
+                    <CheckCircle size={24} className="text-[#AAAAAA] flex-shrink-0" fill="#AAAAAA" />
+                  </h1>
+                  <p className="text-[#AAAAAA] mb-4 text-sm sm:text-base">
+                    Tech Reviews • Tutorials • Comparisons
+                  </p>
+                  <div className="flex flex-wrap gap-4 sm:gap-6 text-[#AAAAAA] text-sm sm:text-base">
+                    <div className="flex items-center gap-2">
+                      <Users size={18} className="flex-shrink-0" />
+                      <span className="font-medium">{formatNumber(channelInfo.subscribers)}</span>
+                      <span className="hidden xs:inline">subscribers</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Eye size={18} className="flex-shrink-0" />
+                      <span className="font-medium">{formatNumber(channelInfo.totalViews)}</span>
+                      <span className="hidden xs:inline">views</span>
+                    </div>
                   </div>
                 </div>
+                <a
+                  href={`https://www.youtube.com/${channelInfo.customUrl || "channel/" + channelId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto bg-[#FF0000] text-white px-6 sm:px-8 py-3 rounded-full font-semibold hover:bg-[#CC0000] transition-all hover:scale-105 text-center whitespace-nowrap"
+                >
+                  Subscribe
+                </a>
               </div>
-              <a
-                href={`https://www.youtube.com/${channelInfo.customUrl || "channel/" + channelId}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 md:mt-0 bg-red-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-red-700 transition-all hover:scale-105"
-              >
-                Subscribe Now
-              </a>
             </div>
           </div>
         )}
 
         {/* Featured Video */}
         {featuredVideo && (
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+          <div className="mb-8 sm:mb-12">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 px-1">
               Featured Video
             </h2>
             <a
               href={featuredVideo.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="block group relative rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all"
+              className="block group relative rounded-xl overflow-hidden bg-[#212121]"
             >
-              <img
-                src={featuredVideo.thumbnail}
-                alt={featuredVideo.title}
-                className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/60 transition-all">
-                <div className="w-24 h-24 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Play size={40} className="text-white ml-2" fill="white" />
+              <div className="relative aspect-video overflow-hidden">
+                <img
+                  src={featuredVideo.thumbnail}
+                  alt={featuredVideo.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-all flex items-center justify-center">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-[#FF0000] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
+                    <Play size={32} className="text-white ml-1 sm:ml-2" fill="white" />
+                  </div>
+                </div>
+                <div className="absolute bottom-2 right-2 bg-black/90 px-2 py-1 rounded text-xs sm:text-sm text-white font-semibold">
+                  {featuredVideo.duration}
                 </div>
               </div>
-              <div className="absolute bottom-4 left-4 text-white font-semibold text-xl">
-                {featuredVideo.title}
-              </div>
-              <div className="absolute bottom-4 right-4 bg-black/80 px-3 py-1 rounded-lg text-sm text-white">
-                {featuredVideo.duration}
+              <div className="p-3 sm:p-4">
+                <h3 className="text-white font-semibold text-base sm:text-lg lg:text-xl line-clamp-2 group-hover:text-[#FF0000] transition-colors">
+                  {featuredVideo.title}
+                </h3>
+                <div className="flex items-center gap-2 mt-2 text-[#AAAAAA] text-xs sm:text-sm">
+                  <Eye size={14} />
+                  <span>{formatNumber(featuredVideo.views)} views</span>
+                </div>
               </div>
             </a>
           </div>
@@ -211,40 +237,40 @@ export function Videos() {
         {/* Latest Videos Grid */}
         {videos.length > 0 && (
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 px-1">
               Latest Uploads
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
               {videos.slice(1).map((v) => (
                 <a
                   key={v.id}
                   href={v.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-white dark:bg-[#1A1A1A] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1"
+                  className="group bg-[#212121] rounded-xl overflow-hidden hover:bg-[#272727] transition-all"
                 >
-                  <div className="relative h-48 overflow-hidden">
+                  <div className="relative aspect-video overflow-hidden bg-black">
                     <img
                       src={v.thumbnail}
                       alt={v.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                      <div className="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Play size={26} className="text-white ml-1" fill="white" />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center">
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#FF0000] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all shadow-2xl">
+                        <Play size={20} className="text-white ml-1" fill="white" />
                       </div>
                     </div>
-                    <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded">
+                    <div className="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 bg-black/90 text-white text-xs px-1.5 py-0.5 sm:px-2 sm:py-1 rounded font-semibold">
                       {v.duration}
                     </div>
                   </div>
-                  <div className="p-4">
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2 group-hover:text-red-600 dark:group-hover:text-red-400">
+                  <div className="p-3 sm:p-4">
+                    <h3 className="text-white font-medium text-sm sm:text-base line-clamp-2 mb-2 group-hover:text-[#AAAAAA] transition-colors leading-snug">
                       {v.title}
                     </h3>
-                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                      <Eye size={14} className="mr-1" />
-                      {formatNumber(v.views)} views
+                    <div className="flex items-center gap-1.5 text-[#AAAAAA] text-xs sm:text-sm">
+                      <Eye size={14} className="flex-shrink-0" />
+                      <span>{formatNumber(v.views)} views</span>
                     </div>
                   </div>
                 </a>
